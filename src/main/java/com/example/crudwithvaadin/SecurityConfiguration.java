@@ -1,6 +1,5 @@
 package com.example.crudwithvaadin;
 
-import com.google.api.services.sheets.v4.SheetsScopes;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,8 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Configuration
 public class SecurityConfiguration extends VaadinWebSecurity {
 
-    private static final String LOGIN_URL = "/login";
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -19,6 +16,8 @@ public class SecurityConfiguration extends VaadinWebSecurity {
                         .requestMatchers("/sheets").permitAll())
                 .oauth2Login(c -> c
                         .loginPage("/login").permitAll());
+//                .sessionManagement((session) -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         super.configure(http);
     }
 }
